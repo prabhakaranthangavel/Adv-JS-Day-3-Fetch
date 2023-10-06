@@ -1,0 +1,80 @@
+Contents:
+
+Use of fetch()
+
+*************************************************************************************************************************
+
+Fetch:
+
+===>Fetch எடுக்கவும் அல்லது எடுத்தல்.
+
+===>Syntax: 
+
+    fetch("எதை எடுக்கிறோம் or API link");
+
+===>It is alternative to XHR.
+    XHR stands for XmlHttpRequest
+
+===>Step 1 : Fetch takes API as a parameter.
+    fetch க்கு parameter(API) கொடுக்க வேண்டும்.
+    fetch("https:www.google.com") 
+
+===>Step 2 : Return type is a promise.
+    **Remember: always need a .then and .catch to handle promise.**
+    fetch ஆனது Promise ஐ return செய்யும்.
+    அதாவது .then & .catch
+
+===>fetch ல் 2 different parts உள்ளது.
+    (1)header       (2)body 
+
+===>header ல் தான் பெரும்பாலும் data வரும்.
+
+===>The body section in the fetch is a readable stream.
+    body section ஐ பார்த்துக் கொள்ள மட்டுமே முடியும்.
+    ஏனென்றால் இது ஒரு readable stream ஆகும்.
+    அதாவது Raw Section.
+
+===>Step 3 : To convert readable stream to object(JSON) We need to .json() method.
+    .json(): it is a method to convert the body data into a key:value structure.
+    Readable Stream ஐ மாற்றிக் கொள்ளத்தான் JSON பயன்படுகிறது.
+    .json என்று கொடுக்கும்போது JSON Format (Object => key : value)ல் வந்துவிடும்.
+    மாற்றும் போது Array of Object ஆக மாறும்.
+
+===>Exmaple:
+
+    const res = fetch("https://restcountries.com/v2/all")
+    res.then((data) => data.json()).then((data1) => {
+        for (var i = 0; i <= data1.length; i++) {
+            console.log(data1[i].name);
+        }
+    })
+
+===>Summary:
+
+    ===>Syntax: 
+    fetch("எதை எடுக்கிறோம் or API link");
+
+    ===>Step 1 : Fetch takes API as a parameter.
+    fetch("https:www.google.com") 
+
+    ===>Step 2 : Return type is a promise.
+    அதாவது .then & .catch
+
+    ===>Step 3 : To convert readable stream to object(JSON) We need to .json() method.
+
+                ***************************************************************** 
+
+===>API link ன் console ல் வந்த output ஐ screen க்கு கொண்டுவர
+
+===>Example:
+
+    const res = fetch("https://restcountries.com/v2/all")
+    res.then((data) => data.json()).then((data1) => {
+        for (let i = 0; i <= data1.length; i++) {
+            const task = document.createElement("div")
+            task.innerHTML = `${data1[i].name}`           //or // data1[i].name
+            document.body.append(task);
+        }
+    })
+
+*************************************************************************************************************************
